@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 5001:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USE: senac
+      WORDPRESS_DB_PASSWORD: senac@123
+      WORDPRESS_DB_NAME: wordpressdb
+    volumes:
+      - ~/wordpress:/var/www/html
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: senac
+      MYSQL_PASSWORD: senac@123
+      MYSQL_ROOT_PASSWORD: senac@123
+    volumes:
+      - ~/dt-mysql:/var/lib/mysql
+  volumes:
+    wordpress:
+    db:
